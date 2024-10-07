@@ -4,7 +4,25 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        pass
+        stack = []
+        mapping = {')': '(', ']': '[', '}': '{'}
+        
+        for char in s:
+            if char in mapping.values():  # if it's an opening parenthesis
+                stack.append(char)
+            elif char in mapping.keys():  # if it's a closing parenthesis
+                if not stack or stack[-1] != mapping[char]:
+                    return False
+                stack.pop()
+        
+        return len(stack) == 0
+
+# Example usage:
+solution = Solution()
+print(solution.isValid("()"))      # Output: true
+print(solution.isValid("()[]{}"))  # Output: true
+print(solution.isValid("(]"))      # Output: false
+
 
 
 
